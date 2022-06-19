@@ -10,3 +10,5 @@ class ScannerFactory {
     throw new Error("Unsupported scanner type");
   };
 }
+
+export default ScannerFactory;

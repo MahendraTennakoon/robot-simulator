@@ -1,7 +1,7 @@
 import CommandType from "./commandType";
 import Direction from "./direction";
-import { readCommands } from "./commandScanner";
 import { parseCommands } from "./commandParser";
+import ScannerFactory from "./scanner/scannerFactory";
 
 let positionX: number = -1,
   positionY: number = -1,
@@ -80,7 +80,8 @@ const init = async () => {
   console.info("Initialized application");
   try {
     console.info("Reading commands");
-    const commands = await readCommands();
+    const scanner = ScannerFactory.getScanner("file");
+    const commands = await scanner.scan();
     const parsedCommands: string[] = parseCommands(commands);
 
     console.info("Executing commands");
