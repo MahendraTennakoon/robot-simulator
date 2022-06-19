@@ -4,12 +4,12 @@ import config from "../config.json";
 class Robot {
   private positionX: number = 0;
   private positionY: number = 0;
-  private direction: Direction = Direction.North; // TODO: should this be a type instead of an enum
+  private direction: Direction = Direction.North;
   private isPlaced: boolean = false;
 
   setPositionX(position: number): void {
     if (position > config.TABLE_WIDTH - 1 || position < 0) {
-      throw new Error(`Position ${position} is out of bounds`);
+      throw new Error(`Position ${position} is out of bounds on X axis`);
     }
     this.positionX = position;
   }
@@ -20,7 +20,7 @@ class Robot {
 
   setPositionY(position: number): void {
     if (position > config.TABLE_HEIGHT - 1 || position < 0) {
-      throw new Error(`Position ${position} is out of bounds`);
+      throw new Error(`Position ${position} is out of bounds on Y axis`);
     }
     this.positionY = position;
   }
@@ -72,6 +72,7 @@ class Robot {
   }
 
   report(): string {
+    if (!this.getIsPlaced()) return "Robot has not been placed on the table";
     return `${this.positionX},${this.positionY},${this.direction}`;
   }
 }

@@ -39,7 +39,11 @@ const run = async () => {
 
       switch (commandType) {
         case CommandType.Move:
-          robot.move();
+          try {
+            robot.move();
+          } catch (err) {
+            console.error(err);
+          }
           break;
         case CommandType.Turn:
           robot.setDirection(command as Direction);

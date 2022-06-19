@@ -14,7 +14,7 @@ describe("test Robot", () => {
       try {
         robot.setPositionX(6);
       } catch (err: any) {
-        expect(err.message).toBe(`Position 6 is out of bounds`);
+        expect(err.message).toBe(`Position 6 is out of bounds on X axis`);
       }
     });
 
@@ -24,7 +24,7 @@ describe("test Robot", () => {
       try {
         robot.setPositionX(-1);
       } catch (err: any) {
-        expect(err.message).toBe(`Position -1 is out of bounds`);
+        expect(err.message).toBe(`Position -1 is out of bounds on X axis`);
       }
     });
   });
@@ -42,7 +42,7 @@ describe("test Robot", () => {
       try {
         robot.setPositionY(6);
       } catch (err: any) {
-        expect(err.message).toBe(`Position 6 is out of bounds`);
+        expect(err.message).toBe(`Position 6 is out of bounds on Y axis`);
       }
     });
 
@@ -52,7 +52,7 @@ describe("test Robot", () => {
       try {
         robot.setPositionY(-1);
       } catch (err: any) {
-        expect(err.message).toBe(`Position -1 is out of bounds`);
+        expect(err.message).toBe(`Position -1 is out of bounds on Y axis`);
       }
     });
   });
