@@ -1,8 +1,8 @@
-enum Direction {
-  North = "NORTH",
-  East = "EAST",
-  South = "SOUTH",
-  West = "WEST",
-}
+export const Direction = {
+  North: "NORTH",
+  East: "EAST",
+  South: "SOUTH",
+  West: "West",
+} as const;
 
-export default Direction;
+export type Direction = typeof Direction[keyof typeof Direction];

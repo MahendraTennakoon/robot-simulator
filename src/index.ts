@@ -1,5 +1,5 @@
 import CommandType from "./commandType";
-import Direction from "./direction";
+import { Direction } from "./direction";
 import { parseCommands } from "./commandParser";
 import ScannerFactory from "./scanner/scannerFactory";
 import Robot from "./robot";
@@ -33,18 +33,7 @@ const run = async () => {
           continue;
         } else {
           const [x, y, dir] = command.replace("PLACE ", "").split(",");
-          // TODO: simplify
-          let direction: Direction = Direction.North;
-          if (dir === Direction.North) {
-            direction = Direction.North;
-          } else if (dir === Direction.East) {
-            direction = Direction.East;
-          } else if (dir === Direction.South) {
-            direction = Direction.South;
-          } else if (dir === Direction.West) {
-            direction = Direction.West;
-          }
-          robot.place(Number(x), Number(y), direction);
+          robot.place(Number(x), Number(y), dir as Direction);
         }
       }
 
@@ -53,18 +42,7 @@ const run = async () => {
           robot.move();
           break;
         case CommandType.Turn:
-          // TODO: simplify
-          let direction: Direction = Direction.North;
-          if (command === Direction.North) {
-            direction = Direction.North;
-          } else if (command === Direction.East) {
-            direction = Direction.East;
-          } else if (command === Direction.South) {
-            direction = Direction.South;
-          } else if (command === Direction.West) {
-            direction = Direction.West;
-          }
-          robot.setDirection(direction);
+          robot.setDirection(command as Direction);
           break;
         case CommandType.Report:
           console.log(robot.report());
