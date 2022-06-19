@@ -2,10 +2,7 @@ import CommandType from "./commandType";
 import Direction from "./direction";
 import { parseCommands } from "./commandParser";
 import ScannerFactory from "./scanner/scannerFactory";
-
-let positionX: number = -1,
-  positionY: number = -1,
-  direction: string = "";
+import Robot from "./robot";
 
 const getCommandtype = (command: string) => {
   if (command.startsWith(CommandType.Place)) return CommandType.Place;
@@ -14,79 +11,67 @@ const getCommandtype = (command: string) => {
   if (command === CommandType.Report) return CommandType.Report;
 };
 
-const place = (command: string) => {
-  const [x, y, dir] = command.replace("PLACE ", "").split(",");
-  positionX = Number(x);
-  positionY = Number(y);
-  direction = dir;
-};
-
-const move = () => {
-  switch (direction) {
-    case Direction.North:
-      positionY++;
-      break;
-    case Direction.East:
-      positionX++;
-      break;
-    case Direction.South:
-      positionY--;
-      break;
-    case Direction.West:
-      positionX--;
-      break;
-    default:
-      break;
-  }
-};
-
-const turn = (command: string) => {
-  direction = command;
-};
-
-const report = () => {
-  console.log(`${positionX},${positionY},${direction}`);
-};
-
-const executeCommand = (command: string): void => {
-  const commandType = getCommandtype(command);
-  if (positionX === -1) {
-    if (commandType !== CommandType.Place) {
-      console.error(
-        `Cannot execute command: ${command} because the robot has not been placed`
-      );
-      return;
-    } else {
-      place(command);
-    }
-  }
-
-  switch (commandType) {
-    case CommandType.Move:
-      move();
-      break;
-    case CommandType.Turn:
-      turn(command);
-      break;
-    case CommandType.Report:
-      report();
-      break;
-    default:
-      break;
-  }
-};
-
-const init = async () => {
+const run = async () => {
   console.info("Initialized application");
   try {
     console.info("Reading commands");
     const scanner = ScannerFactory.getScanner("file");
     const commands = await scanner.scan();
     const parsedCommands: string[] = parseCommands(commands);
+    const robot = new Robot();
 
     console.info("Executing commands");
     for (let i = 0; i < parsedCommands.length; i++) {
-      executeCommand(parsedCommands[i]);
+      const command = parsedCommands[i];
+      const commandType = getCommandtype(command);
+
+      if (!robot.getIsPlaced()) {
+        if (commandType !== CommandType.Place) {
+          console.error(
+            `Cannot execute command: ${command} because the robot has not been placed`
+          );
+          continue;
+        } else {
+          const [x, y, dir] = command.replace("PLACE ", "").split(",");
+          // TODO: simplify
+          let direction: Direction = Direction.North;
+          if (dir === Direction.North) {
+            direction = Direction.North;
+          } else if (dir === Direction.East) {
+            direction = Direction.East;
+          } else if (dir === Direction.South) {
+            direction = Direction.South;
+          } else if (dir === Direction.West) {
+            direction = Direction.West;
+          }
+          robot.place(Number(x), Number(y), direction);
+        }
+      }
+
+      switch (commandType) {
+        case CommandType.Move:
+          robot.move();
+          break;
+        case CommandType.Turn:
+          // TODO: simplify
+          let direction: Direction = Direction.North;
+          if (command === Direction.North) {
+            direction = Direction.North;
+          } else if (command === Direction.East) {
+            direction = Direction.East;
+          } else if (command === Direction.South) {
+            direction = Direction.South;
+          } else if (command === Direction.West) {
+            direction = Direction.West;
+          }
+          robot.setDirection(direction);
+          break;
+        case CommandType.Report:
+          console.log(robot.report());
+          break;
+        default:
+          break;
+      }
     }
     console.info("Finished executing commands");
   } catch (error) {
@@ -94,4 +79,4 @@ const init = async () => {
   }
 };
 
-init();
+run();

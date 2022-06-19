@@ -37,6 +37,36 @@ class Robot {
   getDirection(): Direction {
     return this.direction;
   }
+
+  place(x: number, y: number, direction: Direction): void {
+    this.setPositionX(x);
+    this.setPositionY(y);
+    this.setDirection(direction);
+    this.setIsPlaced(true);
+  }
+
+  move(): void {
+    switch (this.direction) {
+      case Direction.North:
+        this.setPositionY(this.positionY + 1);
+        break;
+      case Direction.East:
+        this.setPositionX(this.positionX + 1);
+        break;
+      case Direction.South:
+        this.setPositionY(this.positionY - 1);
+        break;
+      case Direction.West:
+        this.setPositionX(this.positionX - 1);
+        break;
+      default:
+        break;
+    }
+  }
+
+  report(): string {
+    return `${this.positionX},${this.positionY},${this.direction}`;
+  }
 }
 
 export default Robot;
