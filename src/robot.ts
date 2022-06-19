@@ -1,4 +1,5 @@
 import { Direction } from "./direction";
+import config from "../config.json";
 
 class Robot {
   private positionX: number = 0;
@@ -7,6 +8,9 @@ class Robot {
   private isPlaced: boolean = false;
 
   setPositionX(position: number): void {
+    if (position > config.TABLE_WIDTH - 1 || position < 0) {
+      throw new Error(`Position ${position} is out of bounds`);
+    }
     this.positionX = position;
   }
 
@@ -15,6 +19,9 @@ class Robot {
   }
 
   setPositionY(position: number): void {
+    if (position > config.TABLE_HEIGHT - 1 || position < 0) {
+      throw new Error(`Position ${position} is out of bounds`);
+    }
     this.positionY = position;
   }
 
