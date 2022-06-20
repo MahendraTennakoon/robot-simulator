@@ -8,6 +8,7 @@ class Robot {
   private isPlaced: boolean = false;
 
   setPositionX(position: number): void {
+    // TODO: remove tight coupling with configs
     if (position > config.TABLE_WIDTH - 1 || position < 0) {
       throw new Error(`Position ${position} is out of bounds on X axis`);
     }

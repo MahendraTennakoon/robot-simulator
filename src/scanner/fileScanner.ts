@@ -4,7 +4,7 @@ import Scanner from "./scanner";
 
 class FileScanner implements Scanner {
   async scan(): Promise<string> {
-    const commands = await fs.readFile("./commands.txt");
+    const commands = await fs.readFile("./commands.txt"); // todo: parameterize
     return commands.toString();
   }
 }
