@@ -3,6 +3,9 @@ import { Direction } from "./direction";
 import { parseCommands } from "./commandParser";
 import ScannerFactory from "./scanner/scannerFactory";
 import Robot from "./robot";
+import Invoker from "./command/invoker";
+import MoveCommand from "./command/moveCommand";
+import PlaceCommand from "./command/placeCommand";
 
 const getCommandtype = (command: string) => {
   if (command.startsWith(CommandType.Place)) return CommandType.Place;
@@ -21,6 +24,7 @@ const run = async () => {
     const robot = new Robot();
 
     console.info("Executing commands");
+    let invoker;
     for (let i = 0; i < parsedCommands.length; i++) {
       const command = parsedCommands[i];
       const commandType = getCommandtype(command);
@@ -33,14 +37,18 @@ const run = async () => {
           continue;
         } else {
           const [x, y, dir] = command.replace("PLACE ", "").split(",");
-          robot.place(Number(x), Number(y), dir as Direction);
+          invoker = new Invoker(
+            new MoveCommand(robot),
+            new PlaceCommand(Number(x), Number(y), dir as Direction, robot)
+          );
+          invoker.place();
         }
       }
 
       switch (commandType) {
         case CommandType.Move:
           try {
-            robot.move();
+            invoker && invoker.move(); //TODO: remove if possible
           } catch (err) {
             console.error(err);
           }
