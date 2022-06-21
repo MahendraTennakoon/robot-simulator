@@ -10,7 +10,8 @@ import PlaceCommand from "./command/placeCommand";
 const getCommandtype = (command: string) => {
   if (command.startsWith(CommandType.Place)) return CommandType.Place;
   if (command === CommandType.Move) return CommandType.Move;
-  if (command === "LEFT" || command === "RIGHT") return CommandType.Turn;
+  if (command === CommandType.Left) return CommandType.Left;
+  if (command === CommandType.Right) return CommandType.Right;
   if (command === CommandType.Report) return CommandType.Report;
 };
 
@@ -53,7 +54,10 @@ const run = async () => {
             console.error(err);
           }
           break;
-        case CommandType.Turn:
+        case CommandType.Left:
+          robot.setDirection(command as Direction);
+          break;
+        case CommandType.Right:
           robot.setDirection(command as Direction);
           break;
         case CommandType.Report:

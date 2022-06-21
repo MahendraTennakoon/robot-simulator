@@ -1,7 +1,8 @@
 enum CommandType {
   Place = "PLACE",
   Move = "MOVE",
-  Turn = "TURN",
+  Left = "LEFT",
+  Right = "RIGHT",
   Report = "REPORT",
 }
 
