@@ -6,6 +6,8 @@ import Robot from "./robot";
 import Invoker from "./command/invoker";
 import MoveCommand from "./command/moveCommand";
 import PlaceCommand from "./command/placeCommand";
+import LeftCommand from "./command/leftCommand";
+import RightCommand from "./command/rightCommand";
 
 const getCommandtype = (command: string) => {
   if (command.startsWith(CommandType.Place)) return CommandType.Place;
@@ -40,7 +42,9 @@ const run = async () => {
           const [x, y, dir] = command.replace("PLACE ", "").split(",");
           invoker = new Invoker(
             new MoveCommand(robot),
-            new PlaceCommand(Number(x), Number(y), dir as Direction, robot)
+            new PlaceCommand(Number(x), Number(y), dir as Direction, robot),
+            new LeftCommand(robot),
+            new RightCommand(robot)
           );
           invoker.place();
         }
@@ -49,16 +53,16 @@ const run = async () => {
       switch (commandType) {
         case CommandType.Move:
           try {
-            invoker && invoker.move(); //TODO: remove if possible
+            invoker?.move();
           } catch (err) {
             console.error(err);
           }
           break;
         case CommandType.Left:
-          robot.setDirection(command as Direction);
+          invoker?.left();
           break;
         case CommandType.Right:
-          robot.setDirection(command as Direction);
+          invoker?.right();
           break;
         case CommandType.Report:
           console.log(robot.report());
