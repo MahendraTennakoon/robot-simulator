@@ -72,6 +72,44 @@ class Robot {
     }
   }
 
+  left(): void {
+    switch (this.direction) {
+      case Direction.North:
+        this.setDirection(Direction.West);
+        break;
+      case Direction.East:
+        this.setDirection(Direction.North);
+        break;
+      case Direction.South:
+        this.setDirection(Direction.East);
+        break;
+      case Direction.West:
+        this.setDirection(Direction.South);
+        break;
+      default:
+        break;
+    }
+  }
+
+  right(): void {
+    switch (this.direction) {
+      case Direction.North:
+        this.setDirection(Direction.East);
+        break;
+      case Direction.East:
+        this.setDirection(Direction.South);
+        break;
+      case Direction.South:
+        this.setDirection(Direction.West);
+        break;
+      case Direction.West:
+        this.setDirection(Direction.North);
+        break;
+      default:
+        break;
+    }
+  }
+
   report(): string {
     if (!this.getIsPlaced()) return "Robot has not been placed on the table";
     return `${this.positionX},${this.positionY},${this.direction}`;

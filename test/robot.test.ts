@@ -1,3 +1,4 @@
+import { Direction } from "../src/direction";
 import Robot from "../src/robot";
 
 describe("test Robot", () => {
@@ -54,6 +55,66 @@ describe("test Robot", () => {
       } catch (err: any) {
         expect(err.message).toBe(`Position -1 is out of bounds on Y axis`);
       }
+    });
+  });
+
+  describe("test Robot.left", () => {
+    it("should set direction to West if direction is North", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.North);
+      robot.left();
+      expect(robot.getDirection()).toBe(Direction.West);
+    });
+
+    it("should set direction to South if direction is West", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.West);
+      robot.left();
+      expect(robot.getDirection()).toBe(Direction.South);
+    });
+
+    it("should set direction to East if direction is South", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.South);
+      robot.left();
+      expect(robot.getDirection()).toBe(Direction.East);
+    });
+
+    it("should set direction to North if direction is East", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.East);
+      robot.left();
+      expect(robot.getDirection()).toBe(Direction.North);
+    });
+  });
+
+  describe("test Robot.right", () => {
+    it("should set direction to East if direction is North", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.North);
+      robot.right();
+      expect(robot.getDirection()).toBe(Direction.East);
+    });
+
+    it("should set direction to North if direction is West", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.West);
+      robot.right();
+      expect(robot.getDirection()).toBe(Direction.North);
+    });
+
+    it("should set direction to West if direction is South", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.South);
+      robot.right();
+      expect(robot.getDirection()).toBe(Direction.West);
+    });
+
+    it("should set direction to South if direction is East", () => {
+      const robot = new Robot();
+      robot.setDirection(Direction.East);
+      robot.right();
+      expect(robot.getDirection()).toBe(Direction.South);
     });
   });
 });
