@@ -1,11 +1,20 @@
 import { Direction } from "./direction";
 import config from "../config.json";
+import CommandType from "./commandType";
 
 class Robot {
   private positionX: number = 0;
   private positionY: number = 0;
   private direction: Direction = Direction.North;
   private isPlaced: boolean = false;
+
+  validateCommand(command: string): void {
+    if (!this.isPlaced) {
+      throw new Error(
+        `Cannot execute command: ${command} because the robot has not been placed`
+      );
+    }
+  }
 
   setPositionX(position: number): void {
     // TODO: remove tight coupling with configs
@@ -54,6 +63,7 @@ class Robot {
   }
 
   move(): void {
+    this.validateCommand(CommandType.Move);
     switch (this.direction) {
       case Direction.North:
         this.setPositionY(this.positionY + 1);
@@ -73,6 +83,7 @@ class Robot {
   }
 
   left(): void {
+    this.validateCommand(CommandType.Left);
     switch (this.direction) {
       case Direction.North:
         this.setDirection(Direction.West);
@@ -92,6 +103,7 @@ class Robot {
   }
 
   right(): void {
+    this.validateCommand(CommandType.Right);
     switch (this.direction) {
       case Direction.North:
         this.setDirection(Direction.East);
@@ -111,8 +123,7 @@ class Robot {
   }
 
   report(): void {
-    if (!this.getIsPlaced())
-      console.log("Robot has not been placed on the table");
+    this.validateCommand(CommandType.Report);
     console.log(`${this.positionX},${this.positionY},${this.direction}`);
   }
 }

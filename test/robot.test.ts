@@ -61,6 +61,7 @@ describe("test Robot", () => {
   describe("test Robot.left", () => {
     it("should set direction to West if direction is North", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true); // TODO: replace with place()
       robot.setDirection(Direction.North);
       robot.left();
       expect(robot.getDirection()).toBe(Direction.West);
@@ -68,6 +69,7 @@ describe("test Robot", () => {
 
     it("should set direction to South if direction is West", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.West);
       robot.left();
       expect(robot.getDirection()).toBe(Direction.South);
@@ -75,6 +77,7 @@ describe("test Robot", () => {
 
     it("should set direction to East if direction is South", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.South);
       robot.left();
       expect(robot.getDirection()).toBe(Direction.East);
@@ -82,6 +85,7 @@ describe("test Robot", () => {
 
     it("should set direction to North if direction is East", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.East);
       robot.left();
       expect(robot.getDirection()).toBe(Direction.North);
@@ -91,6 +95,7 @@ describe("test Robot", () => {
   describe("test Robot.right", () => {
     it("should set direction to East if direction is North", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.North);
       robot.right();
       expect(robot.getDirection()).toBe(Direction.East);
@@ -98,6 +103,7 @@ describe("test Robot", () => {
 
     it("should set direction to North if direction is West", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.West);
       robot.right();
       expect(robot.getDirection()).toBe(Direction.North);
@@ -105,6 +111,7 @@ describe("test Robot", () => {
 
     it("should set direction to West if direction is South", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.South);
       robot.right();
       expect(robot.getDirection()).toBe(Direction.West);
@@ -112,6 +119,7 @@ describe("test Robot", () => {
 
     it("should set direction to South if direction is East", () => {
       const robot = new Robot();
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.East);
       robot.right();
       expect(robot.getDirection()).toBe(Direction.South);
