@@ -1,6 +1,6 @@
 import { Direction } from "./direction";
 import config from "../config.json";
-import CommandType from "./commandType";
+import CommandType from "./command/commandType";
 
 class Robot {
   private positionX: number = 0;

@@ -4,7 +4,7 @@ import MoveCommand from "../command/moveCommand";
 import PlaceCommand from "../command/placeCommand";
 import ReportCommand from "../command/reportCommand";
 import RightCommand from "../command/rightCommand";
-import CommandType from "../commandType";
+import CommandType from "../command/commandType";
 import { Direction } from "../direction";
 import Robot from "../robot";
 
