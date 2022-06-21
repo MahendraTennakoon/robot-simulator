@@ -1,6 +1,7 @@
 import LeftCommand from "./leftCommand";
 import MoveCommand from "./moveCommand";
 import PlaceCommand from "./placeCommand";
+import ReportCommand from "./reportCommand";
 import RightCommand from "./rightCommand";
 
 class Invoker {
@@ -8,17 +9,20 @@ class Invoker {
   private placeCommad: PlaceCommand;
   private leftCommand: LeftCommand;
   private rightCommand: RightCommand;
+  private reportCommand: ReportCommand;
 
   constructor(
     moveCommand: MoveCommand,
     placeCommad: PlaceCommand,
     leftCommand: LeftCommand,
-    rightCommand: RightCommand
+    rightCommand: RightCommand,
+    reportCommand: ReportCommand
   ) {
     this.moveCommand = moveCommand;
     this.placeCommad = placeCommad;
     this.leftCommand = leftCommand;
     this.rightCommand = rightCommand;
+    this.reportCommand = reportCommand;
   }
 
   move(): void {
@@ -35,6 +39,10 @@ class Invoker {
 
   right(): void {
     this.rightCommand.execute();
+  }
+
+  report(): void {
+    this.reportCommand.execute();
   }
 }
 

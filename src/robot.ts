@@ -110,9 +110,10 @@ class Robot {
     }
   }
 
-  report(): string {
-    if (!this.getIsPlaced()) return "Robot has not been placed on the table";
-    return `${this.positionX},${this.positionY},${this.direction}`;
+  report(): void {
+    if (!this.getIsPlaced())
+      console.log("Robot has not been placed on the table");
+    console.log(`${this.positionX},${this.positionY},${this.direction}`);
   }
 }
 

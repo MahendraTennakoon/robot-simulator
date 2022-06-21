@@ -8,6 +8,7 @@ import MoveCommand from "./command/moveCommand";
 import PlaceCommand from "./command/placeCommand";
 import LeftCommand from "./command/leftCommand";
 import RightCommand from "./command/rightCommand";
+import ReportCommand from "./command/reportCommand";
 
 const getCommandtype = (command: string) => {
   if (command.startsWith(CommandType.Place)) return CommandType.Place;
@@ -44,7 +45,8 @@ const run = async () => {
             new MoveCommand(robot),
             new PlaceCommand(Number(x), Number(y), dir as Direction, robot),
             new LeftCommand(robot),
-            new RightCommand(robot)
+            new RightCommand(robot),
+            new ReportCommand(robot)
           );
           invoker.place();
         }
@@ -65,7 +67,7 @@ const run = async () => {
           invoker?.right();
           break;
         case CommandType.Report:
-          console.log(robot.report());
+          invoker?.report();
           break;
         default:
           break;
