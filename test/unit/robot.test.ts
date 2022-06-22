@@ -1,5 +1,5 @@
-import { Direction } from "../src/direction";
-import Robot from "../src/robot";
+import { Direction } from "../../src/direction";
+import Robot from "../../src/robot";
 
 describe("test Robot", () => {
   describe("test Robot.setPositionX", () => {
