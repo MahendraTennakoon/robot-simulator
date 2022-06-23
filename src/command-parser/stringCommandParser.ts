@@ -1,4 +1,3 @@
-import Command from "../command/command";
 import LeftCommand from "../command/leftCommand";
 import MoveCommand from "../command/moveCommand";
 import PlaceCommand from "../command/placeCommand";
