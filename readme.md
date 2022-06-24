@@ -1,6 +1,6 @@
 # robot-simulator
 
-Simulates a robot moving on a square tabletop. Click [here](problem_description.md) for the complete problem description.
+Simulates a robot moving on a square tabletop.
 
 ## Setup
 
