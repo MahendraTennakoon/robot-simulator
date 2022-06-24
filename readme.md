@@ -9,6 +9,8 @@ Simulates a robot moving on a square tabletop. Click [here](problem_description.
 
 ## Running the program
 
+The commands are read from commands.txt. It has a default set of commands, but you can add your own to it.
+
 - Run `yarn start`
 
 ## Running tests
