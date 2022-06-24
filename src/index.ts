@@ -7,7 +7,7 @@ const run = async () => {
   console.info("Initialized application");
   try {
     console.info("Reading commands");
-    const scanner = ScannerFactory.getScanner("file");
+    const scanner = ScannerFactory.getScanner("file", "commands.txt");
     const rawCommands = await scanner.scan();
     const robot = new Robot();
     const commandFactoryFunctions = new StringCommandParser().parse(
