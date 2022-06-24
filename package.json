@@ -1,7 +1,7 @@
 {
-  "name": "certsy_coding_test",
+  "name": "robot-simulator",
   "version": "1.0.0",
-  "description": "Certsy Coding Test",
+  "description": "Simulates a robot moving on a square tabletop",
   "main": "index.js",
   "author": "Mahendra Tennakoon",
   "license": "MIT",
