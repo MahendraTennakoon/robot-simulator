@@ -124,7 +124,9 @@ class Robot {
 
   report(): void {
     this.validateCommand(CommandType.Report);
-    console.log(`${this.positionX},${this.positionY},${this.direction}`);
+    console.log(
+      `Report: ${this.positionX},${this.positionY},${this.direction}`
+    );
   }
 }
 
