@@ -1,5 +1,5 @@
 interface Scanner {
-  scan(): Promise<string>;
+  scan(): NodeJS.ReadableStream;
 }
 
 export default Scanner;

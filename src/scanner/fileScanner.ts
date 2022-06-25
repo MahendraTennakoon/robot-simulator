@@ -1,4 +1,4 @@
-import { promises as fs } from "fs";
+import fs from "fs";
 
 import Scanner from "./scanner";
 
@@ -9,9 +9,11 @@ class FileScanner implements Scanner {
     this.filePath = filePath;
   }
 
-  async scan(): Promise<string> {
-    const commands = await fs.readFile(this.filePath);
-    return commands.toString();
+  scan(): NodeJS.ReadableStream {
+    const readStream = fs.createReadStream(this.filePath, {
+      encoding: "utf8",
+    });
+    return readStream;
   }
 }
 

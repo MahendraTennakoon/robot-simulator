@@ -6,6 +6,7 @@ import RightCommand from "../command/rightCommand";
 import CommandType from "../command/commandType";
 import { Direction } from "../direction";
 import Robot from "../robot";
+import Command from "../command/command";
 
 class StringCommandParser {
   parse(rawCommands: string, delimiter: RegExp) {
@@ -13,27 +14,32 @@ class StringCommandParser {
     const factoryFunctions = [];
 
     for (const command of commandArray) {
-      if (command.startsWith(CommandType.Place)) {
-        // TODO: handle invalid command params
-        const [x, y, dir] = command.replace("PLACE ", "").split(",");
-        factoryFunctions.push(
-          (robot: Robot) =>
-            new PlaceCommand(Number(x), Number(y), dir as Direction, robot)
-        );
-      } else if (command === CommandType.Move) {
-        factoryFunctions.push((robot: Robot) => new MoveCommand(robot));
-      } else if (command === CommandType.Left) {
-        factoryFunctions.push((robot: Robot) => new LeftCommand(robot));
-      } else if (command === CommandType.Right) {
-        factoryFunctions.push((robot: Robot) => new RightCommand(robot));
-      } else if (command === CommandType.Report) {
-        factoryFunctions.push((robot: Robot) => new ReportCommand(robot));
-      } else {
-        console.error(`Unknown command: ${command}`);
+      try {
+        factoryFunctions.push(this.parseCommand(command));
+      } catch (err) {
+        console.error(err);
       }
     }
 
     return factoryFunctions;
+  }
+
+  parseCommand(command: string) {
+    if (command.startsWith(CommandType.Place)) {
+      const [x, y, dir] = command.replace("PLACE ", "").split(",");
+      return (robot: Robot) =>
+        new PlaceCommand(Number(x), Number(y), dir as Direction, robot);
+    } else if (command === CommandType.Move) {
+      return (robot: Robot) => new MoveCommand(robot);
+    } else if (command === CommandType.Left) {
+      return (robot: Robot) => new LeftCommand(robot);
+    } else if (command === CommandType.Right) {
+      return (robot: Robot) => new RightCommand(robot);
+    } else if (command === CommandType.Report) {
+      return (robot: Robot) => new ReportCommand(robot);
+    } else {
+      throw new Error(`Unknown command: ${command}`);
+    }
   }
 }
 
