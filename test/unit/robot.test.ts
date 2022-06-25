@@ -73,7 +73,7 @@ describe("test Robot", () => {
 
     it("should set direction to West if direction is North", () => {
       const robot = new Robot();
-      robot.setIsPlaced(true); // TODO: replace with place()
+      robot.setIsPlaced(true);
       robot.setDirection(Direction.North);
       robot.left();
       expect(robot.getDirection()).toBe(Direction.West);

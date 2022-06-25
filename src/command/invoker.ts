@@ -1,3 +1,6 @@
+/**
+ * This class can be modified to maintain a history of commands and to support undo operations
+ */
 import LeftCommand from "./leftCommand";
 import MoveCommand from "./moveCommand";
 import PlaceCommand from "./placeCommand";
